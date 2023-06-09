@@ -58,7 +58,7 @@ router.post(
 );
 
 //ROUTE 3
-//Update note for a particular user using: POST "/api/notes/updatenote" Login Required (sign up in layman)
+//Update note for a particular user using: PUT "/api/notes/updatenote" Login Required (sign up in layman)
 //We may use post request here also but conventionally put request is used
 router.put(
   "/updatenote/:id",
@@ -76,7 +76,24 @@ router.put(
       if(note.user.toString() !== req.user.id){return res.status(401).send("Not Allowed");}
       note = await Notes.findByIdAndUpdate(req.params.id,{$set : newNote},{new:true})
       res.json({note});
+    }
+    );
+    
+    //ROUTE 4
+    //Delete note for a particular user using: DELETE "/api/notes/updatenote" Login Required (sign up in layman)
+    router.delete(
+  "/deletenote/:id",
+  fetchuser,
+  async (req, res) => {
+    //Find the note to be deleted and delete it
+    let note=await Notes.findById(req.params.id);
+    if(!note){return res.status(404).send("Not Found");}
+    
+    //Allow deletion only if user own this note
+    if(note.user.toString() !== req.user.id){return res.status(401).send("Not Allowed");}
+
+    note = await Notes.findByIdAndDelete(req.params.id)
+    res.json({"Success":"note has been deleted",note:note}); 
   }
 );
-
 module.exports = router;
