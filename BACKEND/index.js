@@ -12,5 +12,5 @@ app.use('/api/auth',require('./routes/auth'));
 app.use('/api/notes',require('./routes/notes'));
 
 app.listen(port, () => {
-  console.log(`Example app listening on localhost:${port}`)
+  console.log(`NotesNation backend listening at http://localhost:${port}`)
 })
