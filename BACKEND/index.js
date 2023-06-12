@@ -1,10 +1,14 @@
 const connectToMongo=require('./db');
 const express = require('express')
+//Cors must be installed by npm i cors and use line 4 to import and use line 10 to use it
+//It basically helps in with fetching errors
+var cors=require('cors');
 connectToMongo();
 
 const app = express()
 const port = 5000
 
+app.use(cors())
 app.use(express.json());
 
 //Available Routes
