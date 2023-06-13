@@ -5,7 +5,7 @@ import noteContext from "../context/notes/noteContext";
 
 const Notes = () => {
   const context = useContext(noteContext);
-  const { notes, getNotes } = context;
+  const {notes, getNotes, editNote} = context;
   const [note, setNote] = useState({
     id: "",
     etitle: "",
@@ -26,7 +26,7 @@ const Notes = () => {
     setNote({ ...note, [e.target.name]: e.target.value });
   };
   const handleClick = (e) => {
-    console.log("Updating the note",note);
+    editNote(note.id,note.etitle,note.edescription,note.etag);
     refClose.current.click();
   };
   return (
