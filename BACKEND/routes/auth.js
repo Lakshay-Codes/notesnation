@@ -38,18 +38,21 @@ router.post(
     body("password", "Enter a valid password").isLength({ min: 5 }),
   ],
   async (req, res) => {
+    let success=true;
     //If there are errors, return BAD request and the errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      success=false;
       return res.status(400).json({ errors: errors.array() });
     }
     try {
       //Check whether the user with this email exist already
       let user = await User.findOne({ email: req.body.email });
       if (user) {
+        success=false;
         return res
           .status(400)
-          .json({ error: "Sorry user with this email already exists" });
+          .json({ success,error: "Sorry user with this email already exists" });
       }
       //Create a salt which is used to defeat rainbow table as it is a random value added to the hash 
       const salt=await bcrypt.genSalt(10);
@@ -72,8 +75,9 @@ router.post(
       const authToken=jwt.sign(data,JWT_SECRET);
       //Sending Token to the user containing id for quick access and auth
       //we need to convert data into obj so that json function takes it as json
-      res.json({authToken});
+      res.json({success,authToken});
     } catch (error) {
+      success=false;
       //Since any kind of random error can occur apart from wrong fields filled by user it will help to notify that
       console.error(error.message);
       res.status(500).send("Internal server error occured");
@@ -84,7 +88,7 @@ router.post(
 //
 //
 //ROUTE 2
-//Authenticate a User using: POST "/api/auth/createuser" No Login Required(login of existing user)
+//Authenticate a User using: POST "/api/auth/login" No Login Required(login of existing user)
 router.post(
   "/login",
   [//I will not allow login to occur successfully without taking valid email from user side How? see line 88
@@ -93,6 +97,7 @@ router.post(
     body("password", "Password cannot be blank").exists()
   ],
   async (req, res) => {
+    let success=false;
     //If there are errors, return BAD request and the errors
     const errors = validationResult(req);
     //if array of errors is not empty that means there are errors that means i will return from line 92
@@ -107,7 +112,8 @@ router.post(
       let user=await User.findOne({email});
       if(!user){
         //Code 400 means error 
-        return res.status(400).json({error:"Please try to login using correct credentials"});
+        success=false;
+        return res.status(400).json({success,error:"Please try to login using correct credentials"});
       }
       //now since email exists lets compare whether password is correct or not
       //remember user.password is hashed+salted form of real password hence we require to used below method
@@ -115,7 +121,8 @@ router.post(
       //Above is a boolean variable
       if(!passwordCompare){
         //If password entered is wrong simply return that input to login is incorrect
-        return res.status(400).json({error:"Please try to login using correct credentials"});
+        success=false;
+        return res.status(400).json({success,error:"Please try to login using correct credentials"});
       }
       //What is payload(var data)?-imp info for either receiving or sending info
       const data={
@@ -127,7 +134,8 @@ router.post(
       //Basically we check whether user is authorized then send him/her token
       const authToken=jwt.sign(data,JWT_SECRET);
       //Send authToken in obj format so that it gets converted into json 
-      res.json({authToken});
+      success=true;
+      res.json({success,authToken});
     } catch (error) {
       //Since any kind of random error can occur apart from wrong fields filled by user it will help to notify that
       console.error(error.message);
