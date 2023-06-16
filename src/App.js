@@ -11,19 +11,28 @@ import NoteState from "./context/notes/NoteState.js";
 import Alert from "./components/Alert.js";
 import Login from "./components/Login.js";
 import SignUp from "./components/SignUp.js";
+import { useState } from "react";
 function App() {
+  const [alert,setAlert] =useState({type:" ",msg : " "});
+  const showAlert=(message,type)=>{
+    setAlert({
+      msg : message,
+      type : type
+    })
+    setTimeout(()=>{setAlert(null)},1500);
+  }
   return (
     < >
     <NoteState>
       <Router>
         <Navbar />
-        <Alert message="Jai mata di do react from 11:30 to 1:30 daily"/>
+        <Alert alert={alert} />
         <div className="container">
          <Routes>
-           <Route exact path='/' element={<Home />} />
+           <Route exact path='/' element={<Home showAlert={showAlert} />} />
            <Route exact path='/about' element={<About />} />
-           <Route exact path='/login' element={<Login />} />
-           <Route exact path='/signup' element={<SignUp />} />
+           <Route exact path='/login' element={<Login showAlert={showAlert} />} />
+           <Route exact path='/signup' element={<SignUp showAlert={showAlert} />} />
          </Routes>
         </div>
        </Router>
