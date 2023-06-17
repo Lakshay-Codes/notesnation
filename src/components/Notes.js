@@ -1,9 +1,11 @@
 import NoteItem from "./NoteItem";
 import React, { useContext, useEffect, useRef, useState } from "react";
+import {useNavigate} from 'react-router-dom'
 import AddNote from "./AddNote";
 import noteContext from "../context/notes/noteContext";
 
 const Notes = (props) => {
+  let navigate=useNavigate();
   const context = useContext(noteContext);
   const {notes, getNotes, editNote} = context;
   const [note, setNote] = useState({
@@ -13,7 +15,14 @@ const Notes = (props) => {
     etag: "",
   });
   useEffect(() => {
-    getNotes();
+    //Since useEffect without any changing parameter is nothing but a mere component did mount
+    //We are gonna make sure that the component only mounts when we have auth token for a particular
+    //user in local storage
+    if(localStorage.getItem('token')!==undefined){ 
+      getNotes();
+    }else{
+      navigate('/login');
+    }
     // eslint-disable-next-line
   }, []);
   const ref = useRef(null);
