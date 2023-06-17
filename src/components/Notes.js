@@ -18,13 +18,13 @@ const Notes = (props) => {
     //Since useEffect without any changing parameter is nothing but a mere component did mount
     //We are gonna make sure that the component only mounts when we have auth token for a particular
     //user in local storage
-    if(localStorage.getItem('token')!==undefined){ 
+    if(localStorage.getItem('token')){ 
       getNotes();
     }else{
       navigate('/login');
     }
     // eslint-disable-next-line
-  }, []);
+  }, [localStorage]);
   const ref = useRef(null);
   const refClose = useRef(null);
   const updateNote = (currentNote) => {
