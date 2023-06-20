@@ -8,13 +8,13 @@ const NoteItem = (props) => {
   return (
     <div className="col-md-3">
       <div className="card my-3" style={ {width : "18rem"} }>
-        <div className="card-body">
+        <div className={`card-body bg-${props.mode}`}>
           <div className="d-flex align-items-center">
-          <h5 className="card-title">{note.title}</h5>
-            <i className="fa-solid fa-trash mx-2" onClick={()=>{deleteNote(note._id); props.showAlert("Notes deleted Successfully","success");}}></i>
-            <i className="fa-solid fa-pen-to-square mx-2" onClick={()=>{updateNote(note); }}></i>
+          <h5 className={`card-title text-${props.mode==='light'? 'dark' : 'light'}`}>{note.title}</h5>
+            <i className={`fa-solid fa-trash mx-2 text-${props.mode==='light'? 'dark' : 'light'}`} onClick={()=>{deleteNote(note._id); props.showAlert("Notes deleted Successfully","success");}}></i>
+            <i className={`fa-solid fa-pen-to-square mx-2 text-${props.mode==='light'? 'dark' : 'light'}`} onClick={()=>{updateNote(note); }}></i>
           </div>
-          <p className="card-text">
+          <p className={`card-text text-${props.mode==='light'? 'dark' : 'light'}`}>
           {note.description}
           </p>
         </div>

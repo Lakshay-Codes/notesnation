@@ -31,25 +31,26 @@ const SignUp = (props) => {
     }
   }
   return (
-    <div className="container"  >
+    <div className={`container my-4 `} >
+      <h2 className={`text-${props.mode==='light'? 'dark' : 'light'} my-4`} >Welcome to NotesNation: Signup to Create Your New Account</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="name" className="form-label">Name</label>
-          <input type="text" onChange={onChange} className="form-control" value={credentials.name} id="name" name="name"   aria-describedby="emailHelp" />
+          <label htmlFor="name" className={`form-label text-${props.mode==='light'? 'dark' : 'light'} `}>Name</label>
+          <input type="text" onChange={onChange} className={`form-control text-${props.mode==='light'? 'dark' : 'light'} bg-${props.mode}`}  value={credentials.name} id="name" name="name"   aria-describedby="emailHelp" />
         </div>
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">Email address</label>
-          <input type="email" onChange={onChange} className="form-control" value={credentials.email} id="email" name="email"  aria-describedby="emailHelp" />
+          <label htmlFor="email" className={`form-label text-${props.mode==='light'? 'dark' : 'light'} `}>Email address</label>
+          <input type="email" onChange={onChange} className={`form-control text-${props.mode==='light'? 'dark' : 'light'} bg-${props.mode}`}  value={credentials.email} id="email" name="email"  aria-describedby="emailHelp" />
         </div>
         <div className="mb-3">
-          <label htmlFor="password" className="form-label">Password</label>
-          <input type="password" onChange={onChange} className="form-control" value={credentials.password} minLength={5} id="password" name="password" />
+          <label htmlFor="password" className={`form-label text-${props.mode==='light'? 'dark' : 'light'} `}>Password</label>
+          <input type="password" onChange={onChange} className={`form-control text-${props.mode==='light'? 'dark' : 'light'} bg-${props.mode}`}   value={credentials.password} minLength={5} id="password" name="password" />
         </div>
         <div className="mb-3">
-          <label htmlFor="cpassword" className="form-label">Confirm Password</label>
-          <input type="password" onChange={onChange} className="form-control" value={credentials.cpassword} minLength={5} id="cpassword" name="cpassword"  />
+          <label htmlFor="cpassword" className={`form-label text-${props.mode==='light'? 'dark' : 'light'} `}>Confirm Password</label>
+          <input type="password" onChange={onChange} className={`form-control text-${props.mode==='light'? 'dark' : 'light'} bg-${props.mode}`}  value={credentials.cpassword} minLength={5} id="cpassword" name="cpassword"  />
         </div>
-        <button type="submit" disabled={credentials.password!==credentials.cpassword} className="btn btn-primary">Submit</button>
+        <button type="submit" disabled={credentials.password!==credentials.cpassword} className={`btn btn-${props.mode==='dark'? 'outline-light' : 'primary'}`}>Submit</button>
       </form>
     </div>
   )

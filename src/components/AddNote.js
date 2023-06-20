@@ -28,16 +28,16 @@ const AddNote = (props) => {
   };
   return (
     <div>
-      <div className="container my-3">
-        <h2>Add a Note</h2>
+      <div className={`container my-4`} >
+        <h2 className={`text-${props.mode==='light'? 'dark' : 'light'}`} >Add a Note</h2>
         <form className="my-3">
           <div className="mb-3">
-            <label htmlFor="title" className="form-label">
+            <label htmlFor="title" className={`form-label text-${props.mode==='light'? 'dark' : 'light'}`}>
               Title
             </label>
             <input
               type="text"
-              className="form-control"
+              className={`form-control text-${props.mode==='light'? 'dark' : 'light'} bg-${props.mode}`}
               id="title"
               name="title"
               onChange={onChange}
@@ -48,12 +48,12 @@ const AddNote = (props) => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="description" className="form-label">
+            <label htmlFor="description" className={`form-label text-${props.mode==='light'? 'dark' : 'light'}`}>
               Description
             </label>
             <input
               type="text"
-              className="form-control"
+              className={`form-control text-${props.mode==='light'? 'dark' : 'light'} bg-${props.mode}`}
               id="description"
               name="description"
               onChange={onChange}
@@ -63,12 +63,12 @@ const AddNote = (props) => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="tag" className="form-label">
+            <label htmlFor="tag" className={`form-label text-${props.mode==='light'? 'dark' : 'light'}`}>
               Tag
             </label>
             <input
               type="text"
-              className="form-control"
+              className={`form-control text-${props.mode==='light'? 'dark' : 'light'} bg-${props.mode}`}
               id="tag"
               name="tag"
               onChange={onChange}
@@ -80,7 +80,7 @@ const AddNote = (props) => {
           <button
             disabled={note.title.length<5 || note.description.length<5 || note.description.tag<5}
             type="submit"
-            className="btn btn-primary"
+            className={`btn btn-${props.mode==='dark'? 'outline-light' : 'primary'}`}
             onClick={handleClick}
           >
             Add Note
