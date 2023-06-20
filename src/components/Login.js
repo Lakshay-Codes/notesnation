@@ -32,7 +32,7 @@ const Login = (props) => {
   }
   return (
     <div className={`container my-4`} >
-      <h2 className={`text-${props.mode==='light'? 'dark' : 'light'} my-4`} >Welcome to NotesNation: Login to Access Your Account</h2>
+      <h2 className={`text-${props.mode==='light'? 'dark' : 'light'} my-4`} >Notes Nation - Your secured notes on the cloud: Login to Access Your Account</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="email" className={`form-label text-${props.mode==='light'? 'dark' : 'light'} `}>Email address</label>
