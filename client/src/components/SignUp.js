@@ -8,28 +8,32 @@ const SignUp = (props) => {
   const onChange=(e)=>{
     setCredentials({...credentials,[e.target.name]:e.target.value})
   }
-  const handleSubmit=async (e) => {
+  const handleSubmit= async(e) => {
     //In order to prevent unwanted page reload    
     e.preventDefault();
-    const {name,email,password} = credentials;
-    const response = await fetch(`${host}/api/auth/createuser`,{
-      method : 'POST',
-      headers : {
-        'Content-Type' : 'application/json'
-      },
-      body: JSON.stringify({name,email,password})
-    }
-    );
-    const json = await response.json();
-    console.log(json);
-    // save the auth token and redirect
-    if(json.success){
-      localStorage.setItem('token',json.authtoken); 
-      navigate('/login');
-      props.showAlert("Your account has been created","success");
-    }else{
-      props.showAlert("Invalid credentials","danger");
-    }
+    try {
+        const {name,email,password} = credentials;
+        const response = await fetch(`${host}/api/auth/createuser`,{
+          method : 'POST',
+          headers : {
+            'Content-Type' : 'application/json'
+          },
+          body: JSON.stringify({name,email,password})
+        }
+        );
+        const json = await response.json();
+        console.log(json);
+        // save the auth token and redirect
+        if(json.success){
+          localStorage.setItem('token',json.authtoken); 
+          navigate('/login');
+        }else{
+          console.log("error");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    
   }
   return (
     <div className={`container my-4 `} >
