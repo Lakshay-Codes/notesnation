@@ -14,7 +14,7 @@ const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
 //Module named fetchuser which is a middleware acts as a middleman to retrive user data from token which is taken from the user after login
-var fetchuser = require("../middleware/fetchUser");
+var fetchuser = require("../middleware/fetchuser");
 
 //Used to validate the input fields like is email having correct format or not
 const { body, validationResult } = require("express-validator");
