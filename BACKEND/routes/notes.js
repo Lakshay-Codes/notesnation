@@ -8,7 +8,7 @@ const router = express.Router();
 const Notes = require("../models/Note");
 
 //Module named fetchuser which is a middleware acts as a middleman to retrive user data from token which is taken from the user after login
-var fetchuser = require("../middleware/fetchUser");
+var fetchuser = require("../middleware/fetchuser");
 
 //ROUTE 1
 //Fetch all notes for a particular user using: GET "/api/notes/fetchallnotes" Login Required (sign up in layman)
