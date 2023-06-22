@@ -1,4 +1,6 @@
+require("dotenv").config();
 const connectToMongo=require('./db');
+//used for config env
 const express = require('express')
 //Cors must be installed by npm i cors and use line 4 to import and use line 10 to use it
 //It basically helps in with fetching errors

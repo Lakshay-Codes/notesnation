@@ -23,7 +23,7 @@ const { body, validationResult } = require("express-validator");
 //We are using Token in order to save login time and auth user efficiently
 //JWT secret is used to provide additional security while auth
 //Ideally put it in an env var
-const JWT_SECRET ='LakshayIsC$oding';
+const JWT_SECRET =process.env.JWT_SECRET;
 //
 //
 //
