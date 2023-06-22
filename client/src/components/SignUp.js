@@ -11,6 +11,7 @@ const SignUp = (props) => {
   const handleSubmit= async(e) => {
     //In order to prevent unwanted page reload    
     e.preventDefault();
+    //very important
     try {
         const {name,email,password} = credentials;
         const response = await fetch(`${host}/api/auth/createuser`,{
@@ -37,7 +38,7 @@ const SignUp = (props) => {
   }
   return (
     <div className={`container my-4 `} >
-      <h2 className={`text-${props.mode==='light'? 'dark' : 'light'} my-4`} >Welcome to NotesNation: Signup to Create Your New Account</h2>
+      <h2 className={`text-${props.mode==='light'? 'dark' : 'light'} my-4`} >Welcome to Notes Nation: Signup to Create Your New Account</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name" className={`form-label text-${props.mode==='light'? 'dark' : 'light'} `}>Name</label>
