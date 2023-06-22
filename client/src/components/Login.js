@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom'
 
 const Login = (props) => {
   let navigate = useNavigate();
+  const host = process.env.REACT_APP_host;
   const [credentials, setCredentials] = useState({email : "",password : ""})
   const onChange=(e)=>{
     setCredentials({...credentials,[e.target.name]:e.target.value})
@@ -10,7 +11,7 @@ const Login = (props) => {
   const handleSubmit=async (e) => {
     //In order to prevent unwanted page reload    
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/auth/login",{
+    const response = await fetch(`${host}/api/auth/login`,{
       method : 'POST',
       headers : {
         'Content-Type': 'application/json'

@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom'
 
 const SignUp = (props) => {
   let navigate = useNavigate();
+  const host = process.env.REACT_APP_host;
   const [credentials, setCredentials] = useState({name : "",email : "",password : "",cpassword : ""});
   const onChange=(e)=>{
     setCredentials({...credentials,[e.target.name]:e.target.value})
@@ -11,7 +12,7 @@ const SignUp = (props) => {
     //In order to prevent unwanted page reload    
     e.preventDefault();
     const {name,email,password} = credentials;
-    const response = await fetch("http://localhost:5000/api/auth/createuser",{
+    const response = await fetch(`${host}/api/auth/createuser`,{
       method : 'POST',
       headers : {
         'Content-Type' : 'application/json'
