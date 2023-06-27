@@ -35,6 +35,8 @@ const SignUp = (props) => {
         console.log(error);
       }
   }
+
+  
   return (
     <div className={`container my-4 `} >
       <h2 className={`text-${props.mode==='light'? 'dark' : 'light'} my-4`} >Welcome to Notes Nation: Signup to Create Your New Account</h2>
