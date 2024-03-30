@@ -21,7 +21,7 @@ const NavBar = (props) => {
                 <Link  className={`nav-link ${location.pathname==="/"? "active" :""}`} aria-current="page" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <Link  className={`nav-link ${location.pathname==="/about"? "active" :""}`} to="/about">About</Link>
+                <Link  className={`nav-link ${location.pathname==="/about"? "active" :""}`} to="/about">About (due to inactivity free render backend service may take 30seconds or more to serve request)</Link>
               </li>
             </ul>
             {localStorage.getItem('token')?<button onClick={handleLogOut} className={`btn btn-${props.mode==='dark'? 'outline-light' : 'primary'} mx-2`}>Logout</button> : <form className="d-flex" role="search">
